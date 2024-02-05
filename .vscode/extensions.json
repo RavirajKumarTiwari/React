@@ -1,3 +1,6 @@
 {
-    "recommendations": ["blackboxapp.blackbox"]
+    "recommendations": [
+        "blackboxapp.blackbox",
+        "christian-kohler.path-intellisense"
+    ]
 }
