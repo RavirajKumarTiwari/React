@@ -1,6 +1,6 @@
 # Blogs-Context
 
-This project is a simple blog application built with React, demonstrating the use of the Context API for state management. The Context API is a component structure provided by the React framework, allowing you to share state and methods with other components without passing props down manually at every level.
+This project is a simple blog application built with React, demonstrating the use of the Context API for state management. Additionally, it utilizes the `useNavigate` and `useLocation` hooks for navigation within the application.
 
 ## What I Learned
 
@@ -31,40 +31,54 @@ The **Provider** component is used higher in the tree and accepts a **value** pr
 The **Consumer** component is used anywhere below the provider in the tree and accepts a function as a child. The function receives the current context value and returns a React node.
 
 ```javascript
-    <MyContext.Consumer>
-        {value => /* render something based on the context value */}
-    </MyContext.Consumer>
+<MyContext.Consumer>
+  {value => /* render something based on the context value */}
+</MyContext.Consumer>
 ```
 
-### How can I access the context value in a functional component using the useContext hook?
+### `useContext` Hook
 
-- React also provides a `useContext` hook, which can be used to consume context without wrapping a component in a **Consumer** component. This can make the code cleaner and easier to understand.
+React provides a `useContext` hook, which can be used to consume context without wrapping a component in a **Consumer** component. This can make the code cleaner and easier to understand.
 
-- In a functional component, you can use the `useContext` hook to access the context value. Here's how you can do it:
+In a functional component, you can use the `useContext` hook to access the context value.
 
-- First, you need to import the `useContext` hook from React and the context you want to access.
+### Using `useNavigate` and `useLocation`
+
+`useNavigate` and `useLocation` are React hooks provided by the React Router library for navigating between different pages and accessing the current URL, respectively.
+
+- `useNavigate`: This hook returns a navigate function that can be used to programmatically navigate to a different page in your application. For example:
 
 ```javascript
-    import React, { useContext } from 'react';
-    import MyContext from './MyContext';
+import { useNavigate } from 'react-router-dom';
+
+function MyComponent() {
+  const navigate = useNavigate();
+
+  function handleClick() {
+    navigate('/another-page');
+  }
+
+  return (
+    <button onClick={handleClick}>Go to Another Page</button>
+  );
+}
 ```
 
-- Then, inside your functional component, you can call `useContext` and pass in the context you want to access. This will return the current value of that context.
+- `useLocation`: This hook returns the current location object, which contains information about the current URL. For example:
 
 ```javascript
-    function MyComponent() {
-        const contextValue = useContext(MyContext);
+import { useLocation } from 'react-router-dom';
 
-    // Now you can use contextValue in your component
-        return (
-          <div>
-            {contextValue}
-          </div>
-        );
-    }
+function MyComponent() {
+  const location = useLocation();
+
+  return (
+    <div>
+      Current URL: {location.pathname}
+    </div>
+  );
+}
 ```
-
-- In this example, `contextValue` will hold the current value of `MyContext`. You can use this value in your component as needed. Remember that whenever the provider of `MyContext` updates, your component will re-render with the new value.
 
 ## Project Structure
 
@@ -81,13 +95,13 @@ To run the project, use the following commands:
 1. Install the dependencies:
 
     ```bash
-        npm install
+    npm install
     ```
 
 2. Start the development server:
 
     ```bash
-        npm start
+    npm start
     ```
 
-This project was a great way to learn about the Context API and how it can be used for state management in a React application. It's a powerful tool that can make passing data around your application much easier.
+This project was a great way to learn about the Context API and how it can be used for state management in a React application. Additionally, integrating `useNavigate` and `useLocation` from React Router adds powerful navigation capabilities to the application, enhancing user experience and interactivity.
